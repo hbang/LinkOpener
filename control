@@ -1,0 +1,10 @@
+Package: ws.hbang.ytopener
+Name: YTOpener
+Pre-Depends: firmware (<< 6.0)
+Depends: mobilesubstrate
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Open YouTube links in the new app
+Maintainer: thekirbylover <ytopener@hbang.ws>
+Author: thekirbylover <ytopener@hbang.ws>
+Section: Tweaks
