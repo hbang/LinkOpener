@@ -9,7 +9,9 @@
 -(void)_openURLCore:(NSURL *)url display:(id)display publicURLsOnly:(BOOL)publicOnly animating:(BOOL)animated additionalActivationFlag:(unsigned int)flags {
 	if (([[url scheme] isEqualToString:@"http"] || [[url scheme] isEqualToString:@"https"])
 		&& ([[url host] isEqualToString:@"twitter.com"] || [[url host] isEqualToString:@"www.twitter.com"])
-		&& [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
+		&& [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]
+                && [[url pathComponents] count] == 2
+) {
 		NSArray *params = [[url query] componentsSeparatedByString:@"&"];
 		for (NSString *i in params)
 			if ([i rangeOfString:@"v="].location == 0) {
