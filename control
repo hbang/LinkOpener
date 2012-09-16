@@ -1,4 +1,4 @@
-Package: com.adaminsull&thekirbylover.LinkOpener
+Package: com.adaminsull.thekirbylover.LinkOpener
 Name: LinkOpener
 Pre-Depends: firmware (<< 6.0)
 Depends: mobilesubstrate
