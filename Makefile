@@ -1,6 +1,6 @@
 include theos/makefiles/common.mk
 
-TWEAK_NAME = YTOpener
+TWEAK_NAME = LinkOpener
 YTOpener_FILES = Tweak.xm
 YTOpener_FRAMEWORKS = UIKit
 
