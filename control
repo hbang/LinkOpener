@@ -4,7 +4,7 @@ Pre-Depends: firmware (<< 6.0)
 Depends: mobilesubstrate
 Version: 1.0
 Architecture: iphoneos-arm
-Description: Open YouTube links in the new app
+Description: Open links in 3rd party app
 Maintainer: adaminsull and thekirbylover 
 Author: adaminsull and thekirbylover 
 Section: Tweaks
