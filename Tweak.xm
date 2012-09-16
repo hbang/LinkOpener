@@ -10,16 +10,10 @@
 	if (([[url scheme] isEqualToString:@"http"] || [[url scheme] isEqualToString:@"https"])
 		&& ([[url host] isEqualToString:@"twitter.com"] || [[url host] isEqualToString:@"www.twitter.com"])
 		&& [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]
-                && [[url pathComponents] count] == 2
-) {
+                && [[url pathComponents] count] == 2 ) {
 		NSArray *params = [[url query] componentsSeparatedByString:@"&"];
-		for (NSString *i in params)
-			if ([i rangeOfString:@"v="].location == 0) {
-				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"twitter://" stringByAppendingString:
-					[i stringByReplacingOccurrencesOfString:@"v=" withString:@""]]]];
-				return;
-			}
-	}
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:[[url pathComponents] objectAtIndex:1]]]];
 	%orig;
+return
 }
 %end
