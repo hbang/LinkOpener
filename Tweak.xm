@@ -12,7 +12,6 @@
 		&& [[url host] isEqualToString:@"twitter.com"]
 		&& [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]
                 && [[url pathComponents] count] == 2) {
-		NSArray *params = [[url query] componentsSeparatedByString:@"&"];
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:[[url pathComponents] objectAtIndex:1]]]];
 		return;
 	}
