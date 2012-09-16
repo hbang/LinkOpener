@@ -14,6 +14,6 @@
 		NSArray *params = [[url query] componentsSeparatedByString:@"&"];
 	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:[[url pathComponents] objectAtIndex:1]]]];
 	%orig;
-return
+        return;
 }
 %end
