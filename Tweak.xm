@@ -17,12 +17,7 @@
 					[i stringByReplacingOccurrencesOfString:@"v=" withString:@""]]]];
 				return;
 			}
-	([[url scheme] isEqualToString:@"twitter"]
-		&& [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
-		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"vnd." stringByAppendingString:[url absoluteString]]]];
-		return;
 	}
 	%orig;
 }
 %end
-s
