@@ -16,5 +16,6 @@
 		return;
 	}
 	%orig;
+NSLog(@"Failed");
 }
 %end
