@@ -23,6 +23,6 @@
 		return;
 	}
 	%orig;
-NSLog(@"Failed");
+	NSLog(@"Failed");
 }
 %end
