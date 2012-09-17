@@ -23,6 +23,12 @@
 		NSLog(@"handling facebook link");
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"facebook://user?screen_name=" stringByAppendingString:[[url pathComponents] objectAtIndex:1]]]];
 		return;
+	} else if (([[url scheme] isEqualToString:@"http"] || [[url scheme] isEqualToString:@"https"])
+		&& [[url host] isEqualToString:@"ebay.com"]
+		&& [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"ebay://"]]
+                && [[url pathComponents] count] == 2) {
+		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"ebay://user?screen_name=" stringByAppendingString:[[url pathComponents] objectAtIndex:1]]]];
+		return;
 	}
 	NSLog(@"not handling link");
 	%orig;
