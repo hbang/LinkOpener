@@ -14,6 +14,8 @@
                 && [[url pathComponents] count] == 2) {
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:[[url pathComponents] objectAtIndex:1]]]];
 		return;
+%end
+
 -(void)_openURLCore:(NSURL *)url display:(id)display publicURLsOnly:(BOOL)publicOnly animating:(BOOL)animated additionalActivationFlag:(unsigned int)flags {
 	if (([[url scheme] isEqualToString:@"http"] || [[url scheme] isEqualToString:@"https"])
 		&& [[url host] isEqualToString:@"facebook.com"]
