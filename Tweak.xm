@@ -13,7 +13,7 @@
 		&& [[url host] isEqualToString:@"twitter.com"]
 		&& [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]
                 && [[url pathComponents] count] == 2) {
-		NSLog(@"handling twitter link");
+		NSLog(@"[LinkOpener] opening twitter");
 		[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:[[url pathComponents] objectAtIndex:1]]]];
 		return;
 	} else if (([[url scheme] isEqualToString:@"http"] || [[url scheme] isEqualToString:@"https"])
