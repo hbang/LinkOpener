@@ -81,4 +81,3 @@
 		%init(LOFacebook);
 	}
 }
-%end
