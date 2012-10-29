@@ -23,7 +23,7 @@
 		} else if ([[url host] isEqualToString:@"www.facebook.com"] && [[url pathComponents] count] == 2 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"fb://profileForLinkOpener/" stringByAppendingString:[[url pathComponents]objectAtIndex:1]]]];
 			return;
-		} else if ([[url host] hasPrefix:@"ebay.co"] && [[url pathComponents] count] == 4 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"ebay://"]]) {
+		} else if (([[url host] hasPrefix:@"ebay.co"] || [[url host] hasPrefix:@"www.ebay.co"]) && [[url pathComponents] count] == 4 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"ebay://"]]) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"ebay://launch?itm=" stringByAppendingString:[[url pathComponents] objectAtIndex:3]]]];
 			return;
 		} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"vnd.youtube://"]]) {
