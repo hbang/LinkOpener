@@ -9,23 +9,22 @@
 #import "JSONKit.h"
 
 %group LOSpringBoard
-%hook SpringBoard
--(void)_openURLCore:(NSURL *)url display:(id)display publicURLsOnly:(BOOL)publicOnly animating:(BOOL)animated additionalActivationFlag:(unsigned int)flags {
+static BOOL LOOpenURL(NSURL *url) {
 	if ([[url scheme] isEqualToString:@"http"] || [[url scheme] isEqualToString:@"https"]) {
 		if ([[url host] isEqualToString:@"twitter.com"] && [[url pathComponents] count] == 2) {
 			if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot://"]]) {
 				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tweetbot:///user_profile/" stringByAppendingString:[[url pathComponents] objectAtIndex:1]]]];
-				return;
+				return YES;
 			} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
 				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:[[url pathComponents] objectAtIndex:1]]]];
-				return;
+				return YES;
 			}
 		} else if ([[url host] isEqualToString:@"www.facebook.com"] && [[url pathComponents] count] == 2 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]]) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"fb://profileForLinkOpener/" stringByAppendingString:[[url pathComponents]objectAtIndex:1]]]];
-			return;
+			return YES;
 		} else if (([[url host] hasPrefix:@"ebay.co"] || [[url host] hasPrefix:@"www.ebay.co"]) && [[url pathComponents] count] == 4 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"ebay://"]]) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"ebay://launch?itm=" stringByAppendingString:[[url pathComponents] objectAtIndex:3]]]];
-			return;
+			return YES;
 		} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"vnd.youtube://"]]) {
 			BOOL isMobile = NO;
 			if (([[url scheme] isEqualToString:@"http"] || [[url scheme] isEqualToString:@"https"]) && ([[url host] isEqualToString:@"youtube.com"] || [[url host] isEqualToString:@"www.youtube.com"] || (isMobile = [[url host] isEqualToString:@"m.youtube.com"])) && isMobile ? [[url fragment] rangeOfString:@"/watch"].length > 0 : [[url path] isEqualToString:@"/watch"]) {
@@ -33,20 +32,34 @@
 				for (NSString *i in params) {
 					if ([i rangeOfString:@"v="].location == 0) {
 						[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"vnd.youtube://" stringByAppendingString:[i stringByReplacingOccurrencesOfString:@"v=" withString:@""]]]];
-						return;
+						return YES;
 					}
 				}
 			} else if ([[url host] isEqualToString:@"youtu.be"] && [[url pathComponents] count] > 1) {
 				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"vnd.youtube://" stringByAppendingString:[[url pathComponents] objectAtIndex:1]]]];
-				return;
+				return YES;
 			} else if ([[url scheme] isEqualToString:@"youtube"]) {
 				[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"vnd." stringByAppendingString:[url absoluteString]]]];
-				return;
+				return YES;
 			}
 		}
 
 	}
-	%orig;
+	return NO;
+}
+
+%hook SpringBoard
+// iOS < 6
+-(void)_openURLCore:(NSURL *)url display:(id)display publicURLsOnly:(BOOL)publicOnly animating:(BOOL)animated additionalActivationFlag:(unsigned int)flags {
+	if (!LOOpenURL(url)) {
+		%orig;
+	}
+}
+// iOS 6+ - thanks to rpetrich for telling us the new method!
+-(void)_openURLCore:(NSURL *)url display:(id)display animating:(BOOL)animating sender:(id)sender additionalActivationFlags:(id)activationFlags {
+	if (!LOOpenURL(url)) {
+		%orig;
+	}
 }
 %end
 %end

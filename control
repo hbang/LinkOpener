@@ -1,9 +1,9 @@
 Package: com.adaminsull.thekirbylover.linkopener
 Name: LinkOpener
 Depends: mobilesubstrate
-Version: 1.0
+Version: 1.0.2
 Architecture: iphoneos-arm
 Description: Open web pages in their apps
-Maintainer: thekirbylover
-Author: thekirbylover
+Maintainer: thekirbylover & adaminsull
+Author: thekirbylover & adaminsull
 Section: Tweaks
