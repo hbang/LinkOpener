@@ -5,6 +5,6 @@ Depends: mobilesubstrate, ws.hbang.libopener
 Version: 1.1
 Architecture: iphoneos-arm
 Description: Open web pages in their apps
-Maintainer: thekirbylover & adaminsull <linkopener@hbang.ws>
-Author: thekirbylover & adaminsull <linkopener@hbang.ws>
+Maintainer: HASHBANG Productions <linkopener@hbang.ws>
+Author: HASHBANG Productions <linkopener@hbang.ws>
 Section: Tweaks
