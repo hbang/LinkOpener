@@ -1,7 +1,7 @@
 /**
  * LinkOpener - Opens links in 3rd party apps.
  *
- * By Adaminsull <http://h4ck.co.uk>
+ * By HASHBANG Productions <http://hbang.ws>
  * Edited by bensge
  * Licensed under the GPL license <http://www.gnu.org/copyleft/gpl.html>
  */
@@ -46,7 +46,6 @@
 					return [NSURL URLWithString:[@"fb://profileForLinkOpener/" stringByAppendingString:[url.pathComponents objectAtIndex:1]]];
 				} else if (([url.host isEqualToString:@"imdb.com"] || [url.host isEqualToString:@"www.imdb.com"]) && url.pathComponents.count == 3 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"imdb://"]]) {
 					// Edited by bensge to add imdb app support
-					// You should've paid a million for this! I swear, if someone steals this and takes money for it, i swear i'll kill him....
 					return [NSURL URLWithString:[@"imdb:///title/" stringByAppendingString:[url.pathComponents objectAtIndex:2]]];
 				} else if (([url.host hasPrefix:@"ebay.co"] || [url.host hasPrefix:@"www.ebay.co"]) && url.pathComponents.count == 4 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"ebay://"]]) {
 					return [NSURL URLWithString:[@"ebay://launch?itm=" stringByAppendingString:[url.pathComponents objectAtIndex:3]]];
