@@ -59,7 +59,7 @@
 						} else {
 							return (id)nil;
 						}
-					} else if (url.pathComponents.count == 4 && ([[url.pathComponents objectAtIndex:3] isEqualToString:@"status"] || [[url.pathComponents objectAtIndex:3] isEqualToString:@"statuses"])) {
+					} else if (url.pathComponents.count == 4 && ([[url.pathComponents objectAtIndex:2] isEqualToString:@"status"] || [[url.pathComponents objectAtIndex:2] isEqualToString:@"statuses"])) {
 						if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot://"]]) {
 							return [NSURL URLWithString:[NSString stringWithFormat:@"tweetbot://%@/status/%@", [url.pathComponents objectAtIndex:1], [url.pathComponents objectAtIndex:3]]];
 						} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitterrific:///"]]) {
