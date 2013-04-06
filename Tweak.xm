@@ -5,6 +5,7 @@
  * Edited by bensge.
  * Netbot support by Aehmlo - Riposte requires to query ADN's API for user ID. If you want to implement this, go ahead, but I don't use it enough to.
  * Twitter status support by Aehmlo.
+ * Twitterrifc support by Aehmlo. Okay, maybe I should stop doing this...
  * Licensed under the GPL license <http://www.gnu.org/copyleft/gpl.html>
  */
  
