@@ -43,11 +43,15 @@
 						return [NSURL URLWithString:[@"tweetbot:///user_profile/" stringByAppendingString:[url.pathComponents objectAtIndex:1]]];
 					} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]]) {
 						return [NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:[url.pathComponents objectAtIndex:1]]];
+					} else if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitterrific:///"]]) {
+						return [NSURL URLWithString:[@"twitterrific:///profile?screen_name=" stringByAppendingString:[url.pathComponents objectAtIndex:1]]];
 					}
 				} else if ([url.host isEqualToString:@"www.facebook.com"] && url.pathComponents.count == 2 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb://"]])
 					return [NSURL URLWithString:[@"fb://profileForLinkOpener/" stringByAppendingString:[url.pathComponents objectAtIndex:1]]];
 				else if ([url.host isEqualToString:@"twitter.com"] && url.pathComponents.count == 4 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot://"]])
 					return [NSURL URLWithString:[NSString stringWithFormat:@"tweetbot://%@/status/%@" ,[url.pathComponents objectAtIndex:1],[url.pathComponents objectAtIndex:3]]];
+				else if ([url.host isEqualToString:@"twitter.com"] && url.pathComponents.count == 4 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitterrific:///"]])
+					return [NSURL URLWithString:[@"twitterrific:///tweet?id=" stringByAppendingString:[url.pathComponents objectAtIndex:3]]];
 				else if ([url.host isEqualToString:@"twitter.com"] && url.pathComponents.count == 4 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]])
 					return [NSURL URLWithString:[@"twitter:///status?id=" stringByAppendingString:[url.pathComponents objectAtIndex:3]]];
 				 else if ([url.host isEqualToString:@"alpha.app.net"] && url.pathComponents.count == 2 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"netbot://"]]) {
