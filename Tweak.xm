@@ -8,9 +8,7 @@
  * Netbot support by Aehmlo - Riposte requires to query
  * ADN's API for user ID. If you want to implement this,
  * go ahead, but I don't use it enough to.
- * Twitter status support by Aehmlo.
- * Twitterrifc support by Aehmlo. Okay, maybe I should
- * stop doing this...
+ * Twitter status support, Twitterrific support, and Cydia support by Aehmlo.
  *
  * Licensed under the GPL license <http://hbang.ws/s/gpl>
  */
@@ -79,6 +77,8 @@
 					return [NSURL URLWithString:[@"ebay://launch?itm=" stringByAppendingString:[url.pathComponents objectAtIndex:3]]];
 				} else if ([url.host isEqualToString:@"alpha.app.net"] && url.pathComponents.count == 2 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"netbot://"]]) {
 					return [NSURL URLWithString:[@"netbot:///user_profile/" stringByAppendingString:[url.pathComponents objectAtIndex:1]]];
+				} else if ([url.host isEqualToString:@"cydia.saurik.com"] && url.pathComponents.count == 3 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"cydia://"]]) {
+					return [NSURL URLWithString:[@"cydia://package/" stringByAppendingString:[url.pathComponents objectAtIndex:2]]];
 				}
 			}
 			return (id)nil;
