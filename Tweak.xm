@@ -46,7 +46,7 @@
 	if ([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.springboard"]) {
 		[[HBLibOpener sharedInstance] registerHandlerWithName:@"LinkOpener" block:^(NSURL *url) {
 			if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
-				if ([url.host isEqualToString:@"twitter.com"]) {
+				if ([url.host isEqualToString:@"twitter.com"] || [url.host isEqualToString:@"mobile.twitter.com"]) {
 					if (url.pathComponents.count == 2) {
 						if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot://"]]) {
 							return [NSURL URLWithString:[@"tweetbot:///user_profile/" stringByAppendingString:[url.pathComponents objectAtIndex:1]]];
