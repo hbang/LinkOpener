@@ -2,7 +2,7 @@ Package: com.adaminsull.thekirbylover.linkopener
 Name: LinkOpener
 Pre-Depends: firmware (>= 4.3)
 Depends: mobilesubstrate, ws.hbang.libopener
-Version: 1.2.1
+Version: 1.2.2
 Architecture: iphoneos-arm
 Description: Open web pages in their apps
 Maintainer: HASHBANG Productions <linkopener@hbang.ws>
