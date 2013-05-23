@@ -18,9 +18,10 @@
 
 %group LOFacebook
 %hook AppDelegate
--(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApp annotation:(id)annotation {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApp annotation:(id)annotation {
 	if ([url.host isEqualToString:@"profileForLinkOpener"] && url.pathComponents.count == 2) {
-		// This is a terrible way to do this, however Facebook crashes if we do this asynchronously. Don't ever do this elsewhere.
+		// This is a terrible way to do this. Don't ever do this.
+		// TODO: un-stupid this
 
 		NSData *output = [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[@"https://graph.facebook.com/" stringByAppendingString:[url.pathComponents objectAtIndex:1]]] cachePolicy:NSURLRequestReloadRevalidatingCacheData timeoutInterval:60] returningResponse:nil error:nil];
 
