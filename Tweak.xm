@@ -88,6 +88,8 @@
 					return [NSURL URLWithString:[@"netbot:///user_profile/" stringByAppendingString:[url.pathComponents objectAtIndex:1]]];
 				} else if ([url.host isEqualToString:@"cydia.saurik.com"] && url.pathComponents.count == 3 && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"cydia://"]]) {
 					return [NSURL URLWithString:[@"cydia://package/" stringByAppendingString:[url.pathComponents objectAtIndex:2]]];
+				} else if (([url.host isEqualToString:@"github.com"] || [url.host isEqualToString:@"gist.github.com"]) && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"ioc://"]]) {
+					return [NSURL URLWithString:[NSString stringWithFormat:@"ioc://%@%@", url.host, url.path]];
 				}
 			}
 			return (id)nil;
