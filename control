@@ -1,4 +1,4 @@
-Package: com.adaminsull.thekirbylover.linkopener
+Package: org.thebigboss.linkopener
 Name: LinkOpener
 Pre-Depends: firmware (>= 4.3)
 Depends: mobilesubstrate, ws.hbang.libopener
