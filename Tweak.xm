@@ -4,17 +4,20 @@
  * By HASHBANG Productions <http://hbang.ws>
  *
  * Edited by bensge for IMDb support.
- *
  * Netbot support by Aehmlo - Riposte requires to query
  * ADN's API for user ID. If you want to implement this,
  * go ahead, but I don't use it enough to.
- * Twitter status support, Twitterrific support, and Cydia support by Aehmlo.
+ * Twitter status support, Twitterrific support, and
+ * Cydia support by Aehmlo.
  *
  * Licensed under the GPL license <http://hbang.ws/s/gpl>
  */
 
 #import "HBLibOpener.h"
-#import "JSONKit.h"
+
+@interface NSData (JSONKit)
+- (NSDictionary *)objectFromJSONData;
+@end
 
 %group LOFacebook
 %hook AppDelegate
@@ -29,8 +32,13 @@
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops, something went wrong." message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 			[alert show];
 			[alert release];
-		} else {
-			NSDictionary *json = [output objectFromJSONData];
+
+			return NO;
+		}
+
+		NSDictionary *json = [output objectFromJSONData];
+
+		if (json && [json objectForKey:@"id"]) {
 			return %orig(application, [NSURL URLWithString:[@"fb://profile/" stringByAppendingString:[json objectForKey:@"id"]]], sourceApp, annotation);
 		}
 
