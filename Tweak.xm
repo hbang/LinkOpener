@@ -52,11 +52,11 @@ NSString *urlToOpen;
 }
 
 - (void)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    if ([url.host isEqualToString:@"_linkopener_url"]) {
-    	urlToOpen = [url.query copy];
-    } else {
-        %orig;
-    }
+	if ([url.host isEqualToString:@"_linkopener_url"]) {
+		urlToOpen = [url.query copy];
+	} else {
+		%orig;
+	}
 }
 
 %end
@@ -84,6 +84,6 @@ NSString *urlToOpen;
 	if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.facebook.Facebook"]) {
 		%init(Facebook);
 	} else if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.designshed.alienblue"]) {
-        %init(AlienBlue);
-    }
+		%init(AlienBlue);
+	}
 }
