@@ -1,3 +1,5 @@
+#import <AlienBlue/NavigationManager.h>
+
 @interface NSData (JSONKit)
 
 - (NSDictionary *)objectFromJSONData;
@@ -37,10 +39,51 @@
 %end
 %end
 
+%group AlienBlue
+BOOL isOpeningURL = NO;
+NSString *urlToOpen;
+
+%hook AlienBlueAppDelegate
+
+- (void)checkClipboardForRedditLink {
+	isOpeningURL = YES;
+	%orig;
+	isOpeningURL = NO;
+}
+
+- (void)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    if ([url.host isEqualToString:@"_linkopener_url"]) {
+    	urlToOpen = [url.query copy];
+    } else {
+        %orig;
+    }
+}
+
+%end
+
+%hook UIPasteboard
+
+- (NSString *)string {
+	return isOpeningURL && self == [UIPasteboard generalPasteboard] ? urlToOpen : %orig;
+}
+
+%end
+
+%hook NSUserDefaults
+
+- (id)objectForKey:(NSString *)key {
+	return [key isEqualToString:@"clipboard_posts"] && isOpeningURL ? @[] : %orig;
+}
+
+%end
+%end
+
 %ctor {
 	%init;
 
 	if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.facebook.Facebook"]) {
 		%init(Facebook);
-	}
+	} else if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.designshed.alienblue"]) {
+        %init(AlienBlue);
+    }
 }

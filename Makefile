@@ -16,4 +16,6 @@ include $(THEOS_MAKE_PATH)/bundle.mk
 include $(THEOS_MAKE_PATH)/tweak.mk
 
 after-install::
+ifneq ($(RESPRING),0)
 	install.exec spring
+endif

@@ -1,1 +1,1 @@
-{ Filter = { Bundles = ( "com.facebook.Facebook" ); }; }
+{ Filter = { Bundles = ( "com.facebook.Facebook", "com.designshed.alienblue" ); }; }
