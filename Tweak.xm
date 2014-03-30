@@ -76,6 +76,14 @@ NSString *urlToOpen;
 }
 
 %end
+
+%hook Post
+
+- (BOOL)isInVisitedList {
+	return isOpeningURL ? NO : %orig;
+}
+
+%end
 %end
 
 %ctor {
