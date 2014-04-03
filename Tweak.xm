@@ -24,7 +24,7 @@
 			return NO;
 		}
 
-		NSDictionary *json = [output objectFromJSONData];
+		NSDictionary *json = output.objectFromJSONData;
 
 		if (json && [json objectForKey:@"id"]) {
 			return %orig(application, [NSURL URLWithString:[@"fb://profile/" stringByAppendingString:[json objectForKey:@"id"]]], sourceApp, annotation);
