@@ -69,10 +69,20 @@ NSString *urlToOpen;
 
 %end
 
+%hook AppSchemeCoordinator
+
++ (void)checkClipboardForRedditLink {
+	isOpeningURL = YES;
+	%orig;
+	isOpeningURL = NO;
+}
+
+%end
+
 %hook UIPasteboard
 
 - (NSString *)string {
-	return isOpeningURL && self == [UIPasteboard generalPasteboard] ? [urlToOpen autorelease] : %orig;
+	return isOpeningURL && self == [UIPasteboard generalPasteboard] ? urlToOpen : %orig;
 }
 
 %end
