@@ -6,6 +6,8 @@
 
 @end
 
+#pragma mark - Facebook
+
 %group Facebook
 %hook AppDelegate
 
@@ -39,17 +41,37 @@
 %end
 %end
 
-%group AlienBlue
+#pragma mark - Alien Blue
+
 BOOL isOpeningURL = NO;
 NSString *urlToOpen;
 
+%group AlienBlueOld
 %hook AlienBlueAppDelegate
 
-- (void)checkClipboardForRedditLink {
+- (void)checkClipboardForRedditLink { // < 2.9
 	isOpeningURL = YES;
 	%orig;
 	isOpeningURL = NO;
 }
+
+%end
+%end
+
+%group AlienBlueNew
+%hook AppSchemeCoordinator
+
++ (void)checkClipboardForRedditLink { // >= 2.9
+	isOpeningURL = YES;
+	%orig;
+	isOpeningURL = NO;
+}
+
+%end
+%end
+
+%group AlienBlue
+%hook AlienBlueAppDelegate
 
 - (void)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 	if ([url.host isEqualToString:@"_linkopener_url"]) {
@@ -86,12 +108,20 @@ NSString *urlToOpen;
 %end
 %end
 
+#pragma mark - Constructor
+
 %ctor {
 	%init;
 
 	if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.facebook.Facebook"]) {
 		%init(Facebook);
-	} else if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.designshed.alienblue"]) {
+	} else if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.designshed.alienblue"] || [[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.reddit.alienblue"]) {
 		%init(AlienBlue);
+
+		if (%c(AppSchemeCoordinator)) {
+			%init(AlienBlueNew);
+		} else {
+			%init(AlienBlueOld);
+		}
 	}
 }
