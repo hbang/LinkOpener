@@ -1,4 +1,6 @@
+#import <AlienBlue/AlienBlueAppDelegate.h>
 #import <AlienBlue/NavigationManager.h>
+#import <AlienBlue/PostsViewController.h>
 
 @interface NSData (JSONKit)
 
@@ -46,36 +48,20 @@
 BOOL isOpeningURL = NO;
 NSString *urlToOpen;
 
-%group AlienBlueOld
-%hook AlienBlueAppDelegate
-
-- (void)checkClipboardForRedditLink { // < 2.9
-	isOpeningURL = YES;
-	%orig;
-	isOpeningURL = NO;
-}
-
-%end
-%end
-
-%group AlienBlueNew
-%hook AppSchemeCoordinator
-
-+ (void)checkClipboardForRedditLink { // >= 2.9
-	isOpeningURL = YES;
-	%orig;
-	isOpeningURL = NO;
-}
-
-%end
-%end
-
 %group AlienBlue
 %hook AlienBlueAppDelegate
 
 - (void)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
 	if ([url.host isEqualToString:@"_linkopener_url"]) {
-		urlToOpen = [url.query copy];
+		NSURL *redditURL = [NSURL URLWithString:url.query];
+
+		if (redditURL.pathComponents.count == 3 && [redditURL.pathComponents[1] isEqualToString:@"r"]) {
+			dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+				[[%c(NavigationManager) shared] showPostsForSubreddit:[NSString stringWithFormat:@"/r/%@/", redditURL.pathComponents[2]] title:nil animated:YES];
+			});
+		} else {
+			urlToOpen = [url.query copy];
+		}
 	} else {
 		%orig;
 	}
@@ -86,7 +72,7 @@ NSString *urlToOpen;
 %hook UIPasteboard
 
 - (NSString *)string {
-	return isOpeningURL && self == [UIPasteboard generalPasteboard] ? urlToOpen : %orig;
+	return isOpeningURL && self == [UIPasteboard generalPasteboard] ? [urlToOpen autorelease] : %orig;
 }
 
 %end
@@ -117,11 +103,5 @@ NSString *urlToOpen;
 		%init(Facebook);
 	} else if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.designshed.alienblue"] || [[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.reddit.alienblue"]) {
 		%init(AlienBlue);
-
-		if (%c(AppSchemeCoordinator)) {
-			%init(AlienBlueNew);
-		} else {
-			%init(AlienBlueOld);
-		}
 	}
 }

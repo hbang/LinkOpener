@@ -61,7 +61,7 @@
 		return [NSURL URLWithString:[@"cydia://package/" stringByAppendingString:url.pathComponents[2]]];
 	} else if (([url.host isEqualToString:@"github.com"] || [url.host isEqualToString:@"gist.github.com"]) && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"ioc://"]]) {
 		return [NSURL URLWithString:[NSString stringWithFormat:@"ioc://%@%@", url.host, url.path]];
-	} else if (([url.host isEqualToString:@"reddit.com"] || [url.host hasSuffix:@".reddit.com"]) && [url.pathComponents containsObject:@"comments"] && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"alienblue://"]]) {
+	} else if (((([url.host isEqualToString:@"reddit.com"] || [url.host hasSuffix:@".reddit.com"]) && ([url.pathComponents containsObject:@"comments"] || url.pathComponents.count == 3)) || [url.host isEqualToString:@"redd.it"]) && [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"alienblue://"]]) {
 		return [NSURL URLWithString:[@"alienblue://_linkopener_url?" stringByAppendingString:url.absoluteString]];
 	}
 
