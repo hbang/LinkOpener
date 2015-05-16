@@ -59,6 +59,14 @@
 		return [NSURL URLWithString:[NSString stringWithFormat:@"ioc://%@%@", url.host, url.path]];
 	} else if ((([url.host isEqualToString:@"reddit.com"] || [url.host hasSuffix:@".reddit.com"]) && ([url.pathComponents containsObject:@"comments"] || url.pathComponents.count == 3)) || [url.host isEqualToString:@"redd.it"]) {
 		return [NSURL URLWithString:[@"alienblue://_linkopener_url?" stringByAppendingString:url.absoluteString]];
+	} else if ([url.host hasSuffix:@".tumblr.com"]) {
+		NSString *blog = [url.host componentsSeparatedByString:@"."][0];
+
+		if (url.pathComponents < 2) {
+			return [NSURL URLWithString:[NSString stringWithFormat:@"tumblr://x-callback-url/blog?blogName=%@", blog. url.pathComponents[2]]];
+		} else if (url.pathComponents.length > 3 && [url.pathComponents[1] isEqualToString:@"post"]) {
+			return [NSURL URLWithString:[NSString stringWithFormat:@"tumblr://x-callback-url/blog?blogName=%@&postID=%@", blog. url.pathComponents[2]]];
+		}
 	}
 
 	return nil;
