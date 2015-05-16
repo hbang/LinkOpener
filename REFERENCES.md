@@ -4,7 +4,7 @@
 * http://x-callback-url.com/apps/
 * http://wiki.akosma.com/IPhone_URL_Schemes
 
-# 
+# URI Scheme References
 ## Twitter
 * http://handleopenurl.com/scheme/twitter
 * http://wiki.akosma.com/IPhone_URL_Schemes#Twitter
