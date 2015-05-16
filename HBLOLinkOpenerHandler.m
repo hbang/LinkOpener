@@ -67,6 +67,14 @@
 		} else if (url.pathComponents.length > 3 && [url.pathComponents[1] isEqualToString:@"post"]) {
 			return [NSURL URLWithString:[NSString stringWithFormat:@"tumblr://x-callback-url/blog?blogName=%@&postID=%@", blog. url.pathComponents[2]]];
 		}
+	} else if ([url.host isEqualToString:@"vine.co"]) {
+		if (url.pathComponents > 2) {
+			if ([url.pathComponents[1] isEqualToString:@"v"]) {
+				return [NSURL URLWithString:[NSString stringWithFormat:@"vine://post/%@", url.pathComponents[2]]];
+			} else if ([url.pathComponents[1] isEqualToString:@"u"]) {
+				return [NSURL URLWithString:[NSString stringWithFormat:@"vine://user/%@", url.pathComponents[2]]];
+			}
+		}
 	}
 
 	return nil;
