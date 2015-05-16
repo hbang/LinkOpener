@@ -62,13 +62,13 @@
 	} else if ([url.host hasSuffix:@".tumblr.com"]) {
 		NSString *blog = [url.host componentsSeparatedByString:@"."][0];
 
-		if (url.pathComponents < 2) {
+		if (url.pathComponents.count < 2) {
 			return [NSURL URLWithString:[NSString stringWithFormat:@"tumblr://x-callback-url/blog?blogName=%@", blog. url.pathComponents[2]]];
-		} else if (url.pathComponents.length > 3 && [url.pathComponents[1] isEqualToString:@"post"]) {
+		} else if (url.pathComponents.count > 3 && [url.pathComponents[1] isEqualToString:@"post"]) {
 			return [NSURL URLWithString:[NSString stringWithFormat:@"tumblr://x-callback-url/blog?blogName=%@&postID=%@", blog. url.pathComponents[2]]];
 		}
 	} else if ([url.host isEqualToString:@"vine.co"]) {
-		if (url.pathComponents > 2) {
+		if (url.pathComponents.count > 2) {
 			if ([url.pathComponents[1] isEqualToString:@"v"]) {
 				return [NSURL URLWithString:[NSString stringWithFormat:@"vine://post/%@", url.pathComponents[2]]];
 			} else if ([url.pathComponents[1] isEqualToString:@"u"]) {
