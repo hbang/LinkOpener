@@ -32,7 +32,27 @@
 	}
 
 	if ([url.host isEqualToString:@"twitter.com"] || [url.host isEqualToString:@"mobile.twitter.com"]) {
-		if (url.pathComponents.count == 2) {
+		static NSArray *NonUsernamePaths;
+		static dispatch_once_t onceToken;
+		dispatch_once(&onceToken, ^{
+			NonUsernamePaths = [@[
+				@"about", @"account", @"accounts", @"activity", @"all", @"announcements", @"anywhere",
+				@"api_rules", @"api_terms", @"apirules", @"apps", @"auth", @"badges", @"blog", @"business",
+				@"buttons", @"contacts", @"devices", @"direct_messages", @"download", @"downloads",
+				@"edit_announcements", @"faq", @"favorites", @"find_sources", @"find_users", @"followers",
+				@"following", @"friend_request", @"friendrequest", @"friends", @"goodies", @"help", @"home",
+				@"im_account", @"inbox", @"invitations", @"invite", @"jobs", @"list", @"login", @"logo",
+				@"logout", @"me", @"mentions", @"messages", @"mockview", @"newtwitter", @"notifications",
+				@"nudge", @"oauth", @"phoenix_search", @"positions", @"privacy", @"public_timeline",
+				@"related_tweets", @"replies", @"retweeted_of_mine", @"retweets", @"retweets_by_others",
+				@"rules", @"saved_searches", @"search", @"sent", @"settings", @"share", @"signup", @"signin",
+				@"similar_to", @"statistics", @"terms", @"tos", @"translate", @"trends", @"tweetbutton",
+				@"twttr", @"update_discoverability", @"users", @"welcome", @"who_to_follow", @"widgets",
+				@"zendesk_auth", @"media_signup"
+			] retain];
+		});
+
+		if (url.pathComponents.count == 2 && ![NonUsernamePaths containsObject:url.pathComponents[1]]) {
 			return @[
 				[NSURL URLWithString:[@"tweetbot:///user_profile/" stringByAppendingString:url.pathComponents[1]]],
 				[NSURL URLWithString:[@"twitter://user?screen_name=" stringByAppendingString:url.pathComponents[1]]],
