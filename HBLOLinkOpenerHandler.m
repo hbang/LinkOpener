@@ -70,8 +70,12 @@
 		return [NSURL URLWithString:[@"fb://profileForLinkOpener/" stringByAppendingString:url.pathComponents[1]]];
 	} else if (([url.host isEqualToString:@"imdb.com"] || [url.host isEqualToString:@"www.imdb.com"]) && url.pathComponents.count == 3) {
 		return [NSURL URLWithString:[@"imdb:///title/" stringByAppendingString:url.pathComponents[2]]];
-	} else if (([url.host hasPrefix:@"ebay.co"] || [url.host hasPrefix:@"www.ebay.co"]) && url.pathComponents.count == 4) {
-		return [NSURL URLWithString:[@"ebay://launch?itm=" stringByAppendingString:url.pathComponents[3]]];
+	} else if ([url.host hasPrefix:@"ebay.co"] || [url.host hasPrefix:@"www.ebay.co"]) {
+		if (url.pathComponents.count == 4) {
+			return [NSURL URLWithString:[@"ebay://launch?itm=" stringByAppendingString:url.pathComponents[3]]];
+		} else if (url.pathComponents.count > 3 && [url.pathComponents[1] isEqualToString:@"sch"]) {
+			return [NSURL URLWithString:[NSString stringWithFormat:@"ebay://%@%@", url.host, url.path]];
+		}
 	} else if ([url.host isEqualToString:@"alpha.app.net"] && url.pathComponents.count == 2) {
 		return [NSURL URLWithString:[@"netbot:///user_profile/" stringByAppendingString:url.pathComponents[1]]];
 	} else if ([url.host isEqualToString:@"cydia.saurik.com"] && url.pathComponents.count == 3) {
