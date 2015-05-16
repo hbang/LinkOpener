@@ -23,6 +23,10 @@
 }
 
 - (id)openURL:(NSURL *)url sender:(NSString *)sender {
+	if ([url.scheme isEqualToString:@"file"]) {
+		return [NSURL URLWithString:[@"ifile://%@" stringByAppendingString:url.path]];
+	}
+
 	if (![url.scheme isEqualToString:@"http"] && ![url.scheme isEqualToString:@"https"]) {
 		return nil;
 	}
