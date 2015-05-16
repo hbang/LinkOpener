@@ -42,14 +42,14 @@
 				@"buttons", @"contacts", @"devices", @"direct_messages", @"download", @"downloads",
 				@"edit_announcements", @"faq", @"favorites", @"find_sources", @"find_users", @"followers",
 				@"following", @"friend_request", @"friendrequest", @"friends", @"goodies", @"help", @"home",
-				@"im_account", @"inbox", @"invitations", @"invite", @"jobs", @"list", @"login", @"logo",
+				@"i", @"im_account", @"inbox", @"invitations", @"invite", @"jobs", @"list", @"login", @"logo",
 				@"logout", @"me", @"mentions", @"messages", @"mockview", @"newtwitter", @"notifications",
 				@"nudge", @"oauth", @"phoenix_search", @"positions", @"privacy", @"public_timeline",
 				@"related_tweets", @"replies", @"retweeted_of_mine", @"retweets", @"retweets_by_others",
-				@"rules", @"saved_searches", @"search", @"sent", @"settings", @"share", @"signup", @"signin",
-				@"similar_to", @"statistics", @"terms", @"tos", @"translate", @"trends", @"tweetbutton",
-				@"twttr", @"update_discoverability", @"users", @"welcome", @"who_to_follow", @"widgets",
-				@"zendesk_auth", @"media_signup"
+				@"rules", @"saved_searches", @"search", @"sent", @"sessions", @"settings", @"share",
+				@"signup", @"signin", @"similar_to", @"statistics", @"terms", @"tos", @"translate", @"trends",
+				@"tweetbutton", @"twttr", @"update_discoverability", @"users", @"welcome", @"who_to_follow",
+				@"widgets", @"zendesk_auth", @"media_signup"
 			] retain];
 		});
 
