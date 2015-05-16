@@ -75,6 +75,14 @@
 				return [NSURL URLWithString:[NSString stringWithFormat:@"vine://user/%@", url.pathComponents[2]]];
 			}
 		}
+	} else if ([url.host isEqualToString:@"instagram.com"]) {
+		if (url.pathComponents.count == 2) {
+			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://user?username=%@", url.pathComponents[1]]];
+		} else if (url.pathComponents.length == 3 && [url.pathComponents[1] isEqualToString:@"p"]) {
+			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://media?id=%@", url.pathComponents[1]]];
+		} else if (url.pathComponents.length == 4 && [url.pathComponents[1] isEqualToString:@"explore"] && [url.pathComponents[2] isEqualToString:@"tags"]) {
+			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://tag?name=%@", url.pathComponents[3]]];
+		}
 	}
 
 	return nil;
