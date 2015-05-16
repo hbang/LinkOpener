@@ -8,6 +8,7 @@
  */
 
 #import "HBLOLinkOpenerHandler.h"
+#import <UIKit/NSString+UIKitAdditions.h>
 
 @implementation HBLOLinkOpenerHandler
 
@@ -102,6 +103,17 @@
 			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://media?id=%@", url.pathComponents[1]]];
 		} else if (url.pathComponents.count == 4 && [url.pathComponents[1] isEqualToString:@"explore"] && [url.pathComponents[2] isEqualToString:@"tags"]) {
 			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://tag?name=%@", url.pathComponents[3]]];
+		}
+	} else if ([url.host isEqualToString:@"dict.cc"] || [url.host hasSuffix:@".dict.cc"]) {
+		if (url.pathComponents.count < 2) {
+			NSDictionary *query = url.query.queryKeysAndValues;
+
+			if (query[@"s"]) {
+				return @[
+					[NSURL URLWithString:[NSString stringWithFormat:@"dictcc-x-callback://x-callback-url/translate?word=%@", query[@"s"]]],
+					[NSURL URLWithString:[NSString stringWithFormat:@"dictccplus-x-callback://x-callback-url/translate?word=%@", query[@"s"]]]
+				];
+			}
 		}
 	}
 
