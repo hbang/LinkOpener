@@ -127,6 +127,16 @@
 				];
 			}
 		}
+	} else if ([url.host isEqualToString:@"yelp.com"] || [url.host isEqualToString:@"www.yelp.com"]) {
+		static NSArray *SupportedPaths;
+		static dispatch_once_t onceToken;
+		dispatch_once(&onceToken, ^{
+			SupportedPaths = [@[ @"search", @"biz", @"check_in", @"check_ins" ] retain];
+		});
+
+		if (url.pathComponents.count > 2 && [SupportedPaths containsObject:url.pathComponents[1]]) {
+			return [NSURL URLWithString:[NSString stringWithFormat:@"yelp5.3://%@", url.path]];
+		}
 	}
 
 	return nil;

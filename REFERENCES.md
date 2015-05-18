@@ -50,3 +50,6 @@
 
 ## Dict.cc
 * http://www.dict.cc/iphone.php
+
+## Yelp
+* https://www.yelp.com/developers/documentation/v2/iphone
