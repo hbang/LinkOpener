@@ -91,6 +91,23 @@
 	} else if ([url.host isEqualToString:@"github.com"] || [url.host isEqualToString:@"gist.github.com"]) {
 		return [NSURL URLWithString:[NSString stringWithFormat:@"ioc://%@%@", url.host, url.path]];
 	} else if ((([url.host isEqualToString:@"reddit.com"] || [url.host hasSuffix:@".reddit.com"]) && ([url.pathComponents containsObject:@"comments"] || url.pathComponents.count == 3)) || [url.host isEqualToString:@"redd.it"]) {
+		// *groan*
+		NSString *threadID = nil;
+
+		if ([url.host isEqualToString:@"redd.it"] && url.pathComponents.count == 2) {
+			// http://redd.it/:thread
+			threadID = url.pathComponents[1];
+		} else if ((url.pathComponents.count == 5 || url.pathComponents.count == 6) && [url.pathComponents[2] isEqualToString:@"r"] && [url.pathComponents containsObject:@"comments"]) {
+			// https://www.reddit.com/r/:subreddit/comments/:thread/:name?/
+			threadID = url.pathComponents[4];
+		}
+
+		if (threadID) {
+			return [NSURL URLWithString:[NSString stringWithFormat:@"alienblue://thread/%@", threadID]];
+		} else if (url.pathComponents.count == 3 && [url.pathComponents[1] isEqualToString:@"r"]) {
+			return [NSURL URLWithString:[NSString stringWithFormat:@"alienblue://r/%@", url.pathComponents[2]]];
+		}
+
 		return [NSURL URLWithString:[@"alienblue://_linkopener_url?" stringByAppendingString:url.absoluteString]];
 	} else if ([url.host hasSuffix:@".tumblr.com"]) {
 		NSString *blog = [url.host componentsSeparatedByString:@"."][0];
