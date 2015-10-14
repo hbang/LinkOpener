@@ -1,7 +1,4 @@
-TARGET = iphone:clang
-ARCHS = armv7 arm64
-
-include theos/makefiles/common.mk
+include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = LinkOpener
 LinkOpener_FILES = HBLOLinkOpenerHandler.m
