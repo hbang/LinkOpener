@@ -31,7 +31,7 @@
 * Same as Tweetbot
 
 ## Cydia
-* http://handleopenurl.com/scheme/ebay
+* http://handleopenurl.com/scheme/cydia
 
 ## iOctocat
 * https://ioctocat.com/faq/
