@@ -89,7 +89,13 @@
 			return [NSURL URLWithString:[@"cydia://package/" stringByAppendingString:url.pathComponents[2]]];
 		}
 	} else if ([url.host isEqualToString:@"github.com"] || [url.host isEqualToString:@"gist.github.com"]) {
-		return [NSURL URLWithString:[NSString stringWithFormat:@"ioc://%@%@", url.host, url.path]];
+		if ([url.host isEqualToString:@"github.com"] &&
+			((url.pathComponents.count == 3 && [url.pathComponents[2] isEqualToString:@"subscription"]) ||
+			 (url.pathComponents.count == 4 && [url.pathComponents[2] isEqualToString:@"unsubscribe_via_email"]))) {
+			// iOctcat is not capable of subscription management
+		} else {
+			return [NSURL URLWithString:[NSString stringWithFormat:@"ioc://%@%@", url.host, url.path]];
+		}
 	} else if ((([url.host isEqualToString:@"reddit.com"] || [url.host hasSuffix:@".reddit.com"]) && ([url.pathComponents containsObject:@"comments"] || url.pathComponents.count == 3)) || [url.host isEqualToString:@"redd.it"]) {
 		// *groan*
 		NSString *threadID = nil;
