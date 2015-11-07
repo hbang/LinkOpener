@@ -65,7 +65,7 @@
 
 	if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.facebook.Facebook"]) {
 		%init(Facebook);
-	} else if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.reddit.alienblue"]) {
+	} else if ([[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.reddit.alienblue"] || [[NSBundle mainBundle].bundleIdentifier isEqualToString:@"com.reddit.alienbluehd"]) {
 		%init(AlienBlue);
 	}
 }
