@@ -1,11 +1,11 @@
 Package: org.thebigboss.linkopener
 Name: LinkOpener
 Pre-Depends: firmware (>= 5.0)
-Depends: mobilesubstrate, ws.hbang.libopener (>= 2.2)
+Depends: mobilesubstrate, ws.hbang.libopener (>= 3.0)
 Version: 1.5
 Architecture: iphoneos-arm
 Description: Open web pages in their apps
 Maintainer: HASHBANG Productions <support@hbang.ws>
 Author: HASHBANG Productions <support@hbang.ws>
-Support: https://www.hbang.ws/faq
+Support: https://www.hbang.ws/faq/
 Section: Tweaks
