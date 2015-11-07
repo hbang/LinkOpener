@@ -1,4 +1,6 @@
 #import <AlienBlue/AppSchemeCoordinator.h>
+#import <AlienBlue/NavigationManager.h>
+#import <AlienBlue/Post.h>
 
 @interface NSData (JSONKit)
 
@@ -48,7 +50,18 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
 	if ([url.host isEqualToString:@"_linkopener_url"]) {
-		[%c(AppSchemeCoordinator) openRedditThreadUrl:url.query];
+		// TODO: ew, this is so hacky
+		dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+			NSString *cleanedURL = url.query;
+
+			if ([cleanedURL rangeOfString:@"http://redd.it/"].location == 0) {
+				cleanedURL = [@"http://redd.it/comments/" stringByAppendingString:[cleanedURL substringFromIndex:16]];
+			}
+
+			Post *post = [%c(Post) postSkeletonFromRedditUrl:cleanedURL];
+			[[%c(NavigationManager) shared] showCommentsForPost:post contextId:post.contextCommentIdent fromController:nil];
+		});
+
 		return YES;
 	} else {
 		return %orig;
