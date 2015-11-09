@@ -165,13 +165,25 @@
 				return nil;
 			}
 
-			return [NSURL URLWithString:[NSString stringWithFormat:@"alienblue://thread/%@", threadID]];
+			return @[
+				[NSURL URLWithString:[NSString stringWithFormat:@"submarine://%@", url.absoluteString]],
+				[NSURL URLWithString:[NSString stringWithFormat:@"alienblue://thread/%@", threadID]]
+			];
 		} else if (url.pathComponents.count == 3 && [url.pathComponents[1] isEqualToString:@"r"]) {
 			if (![_preferences boolForKey:@"RedditSubreddit" default:YES]) {
 				return nil;
 			}
 
-			return [NSURL URLWithString:[NSString stringWithFormat:@"alienblue://r/%@", url.pathComponents[2]]];
+			return @[
+				[NSURL URLWithString:[NSString stringWithFormat:@"submarine://subreddit/%@", url.pathComponents[2]]],
+				[NSURL URLWithString:[NSString stringWithFormat:@"alienblue://r/%@", url.pathComponents[2]]]
+			];
+		} else if (url.pathComponents.count > 2 && ([url.pathComponents[1] isEqualToString:@"u"] || [url.pathComponents[1] isEqualToString:@"user"])) {
+			if (![_preferences boolForKey:@"RedditUser" default:YES]) {
+				return nil;
+			}
+
+			return [NSURL URLWithString:[NSString stringWithFormat:@"submarine://user/%@", url.pathComponents[2]]];
 		}
 
 		return [NSURL URLWithString:[@"alienblue://_linkopener_url?" stringByAppendingString:url.absoluteString]];
