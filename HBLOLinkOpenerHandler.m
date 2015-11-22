@@ -219,7 +219,7 @@
 				return [NSURL URLWithString:[NSString stringWithFormat:@"vine://user/%@", url.pathComponents[2]]];
 			}
 		}
-	} else if ([url.host isEqualToString:@"instagram.com"]) {
+	} else if ([url.host isEqualToString:@"instagram.com"] || [url.host isEqualToString:@"www.instagram.com"]) {
 		if (url.pathComponents.count == 2) {
 			if (![_preferences boolForKey:@"InstagramUser" default:YES]) {
 				return nil;
@@ -238,6 +238,12 @@
 			}
 
 			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://tag?name=%@", url.pathComponents[3]]];
+		} else if (url.pathComponents.count == 4 && [url.pathComponents[1] isEqualToString:@"explore"] && [url.pathComponents[2] isEqualToString:@"locations"]) {
+			if (![_preferences boolForKey:@"InstagramLocation" default:YES]) {
+				return nil;
+			}
+
+			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://location?id=%@", url.pathComponents[3]]];
 		}
 	} else if ([url.host isEqualToString:@"dict.cc"] || [url.host hasSuffix:@".dict.cc"]) {
 		if (url.pathComponents.count < 2) {
