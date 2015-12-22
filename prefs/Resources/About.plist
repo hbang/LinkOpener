@@ -24,13 +24,17 @@
 			<key>big</key>
 			<true/>
 			<key>cellClass</key>
-			<string>HBTwitterCell</string>
+			<string>HBLinkTableCell</string>
 			<key>height</key>
 			<integer>64</integer>
+			<key>icon</key>
+			<string>hbang.png</string>
 			<key>label</key>
 			<string>HASHBANG Productions</string>
-			<key>user</key>
-			<string>hbangws</string>
+			<key>subtitle</key>
+			<string>VISIT_WEBSITE</string>
+			<key>url</key>
+			<string>https://www.hbang.ws/</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -85,14 +89,14 @@
 			<string>DONATE_FOOTER</string>
 		</dict>
 		<dict>
-			<key>action</key>
-			<string>hb_openDonate</string>
 			<key>cell</key>
-			<string>PSLinkCell</string>
+			<string>PSButtonCell</string>
 			<key>cellClass</key>
-			<string>HBTintedTableCell</string>
+			<string>HBLinkTableCell</string>
 			<key>label</key>
 			<string>DONATE</string>
+			<key>url</key>
+			<string>https://www.hbang.ws/donate/</string>
 		</dict>
 	</array>
 	<key>title</key>
