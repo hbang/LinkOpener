@@ -48,7 +48,7 @@
 		return nil;
 	}
 
-	if ([url.host isEqualToString:@"twitter.com"] || [url.host isEqualToString:@"mobile.twitter.com"]) {
+	if ([url.host isEqualToString:@"twitter.com"] || [url.host isEqualToString:@"mobile.twitter.com"] || [url.host isEqualToString:@"m.twitter.com"]) {
 		static NSArray *NonUsernamePaths;
 		static dispatch_once_t onceToken;
 		dispatch_once(&onceToken, ^{
