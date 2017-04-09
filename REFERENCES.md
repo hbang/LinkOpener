@@ -1,14 +1,17 @@
 # Places to start:
 * Google
-* http://handleopenurl.com
+* http://handleopenurl.com/ (dead?!)
 * http://x-callback-url.com/apps/
-* http://wiki.akosma.com/IPhone_URL_Schemes
+* https://onetapless.com/library
+* http://web.archive.org/web/20160717161927/http://wiki.akosma.com/IPhone_URL_Schemes
+
+(2017-04-19: Wow, two of these sites just suddenly died in the past few months. Someone should probably grab a backup handleopenurl… I hope the info it had won’t be lost forever.)
 
 # URI Scheme References
 ## Twitter
 * http://handleopenurl.com/scheme/twitter
 * http://wiki.akosma.com/IPhone_URL_Schemes#Twitter
-* Non-username paths are from the API's [help/configuration](https://dev.twitter.com/rest/reference/get/help/configuration)
+* Non-username paths are from the API’s [help/configuration](https://dev.twitter.com/rest/reference/get/help/configuration)
 
 ## Tweetbot
 * http://tapbots.net/tweetbot3/support/url-schemes/
