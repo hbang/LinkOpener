@@ -1,4 +1,4 @@
-#import <libopener/HBLOHandler.h>
+#import <Opener/HBLOHandler.h>
 
 @interface HBLOLinkOpenerHandler : HBLOHandler
 

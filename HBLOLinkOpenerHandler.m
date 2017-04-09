@@ -226,12 +226,6 @@
 			}
 
 			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://user?username=%@", url.pathComponents[1]]];
-		} else if (url.pathComponents.count == 3 && [url.pathComponents[1] isEqualToString:@"p"]) {
-			if (![_preferences boolForKey:@"InstagramMedia" default:YES]) {
-				return nil;
-			}
-
-			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://media?id=%@", url.pathComponents[1]]];
 		} else if (url.pathComponents.count == 4 && [url.pathComponents[1] isEqualToString:@"explore"] && [url.pathComponents[2] isEqualToString:@"tags"]) {
 			if (![_preferences boolForKey:@"InstagramTag" default:YES]) {
 				return nil;
