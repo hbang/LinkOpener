@@ -26,26 +26,6 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>App.net Alpha</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
-			<key>defaults</key>
-			<string>org.thebigboss.linkopener</string>
-			<key>key</key>
-			<string>AppDotNetAlphaUser</string>
-			<key>label</key>
-			<string>alpha.app.net/dalton</string>
-			<key>PostNotification</key>
-			<string>org.thebigboss.linkopener/ReloadPrefs</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
 			<string>Cydia</string>
 		</dict>
 		<dict>

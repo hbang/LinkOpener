@@ -120,14 +120,6 @@
 
 			return [NSURL URLWithString:[NSString stringWithFormat:@"ebay://%@%@", url.host, url.path]];
 		}
-	} else if ([url.host isEqualToString:@"alpha.app.net"]) {
-		if (url.pathComponents.count == 2) {
-			if (![_preferences boolForKey:@"AppDotNetAlphaUser" default:YES]) {
-				return nil;
-			}
-
-			return [NSURL URLWithString:[@"netbot:///user_profile/" stringByAppendingString:url.pathComponents[1]]];
-		}
 	} else if ([url.host isEqualToString:@"cydia.saurik.com"]) {
 		if (url.pathComponents.count == 3 && [url.pathComponents[1] isEqualToString:@"package"]) {
 			if (![_preferences boolForKey:@"CydiaPackage" default:YES]) {
