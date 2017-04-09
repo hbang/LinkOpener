@@ -268,6 +268,24 @@
 
 			return [NSURL URLWithString:[NSString stringWithFormat:@"yelp5.3://%@", url.path]];
 		}
+	} else if ([url.host isEqualToString:@"overcast.fm"]) {
+		if (url.pathComponents.count == 2 && [url.pathComponents[1] hasPrefix:@"+"]) {
+			if (![_preferences boolForKey:@"OvercastEpisode" default:YES]) {
+				return nil;
+			}
+
+			return [NSURL URLWithString:[NSString stringWithFormat:@"overcast://open%@", url.path]];
+		} else if (url.pathComponents.count == 2 || url.pathComponents.count == 3) {
+			NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^itunes\\d+$|^p\\d+-[\\w\\d]+$" options:NSRegularExpressionCaseInsensitive error:nil];
+
+			if ([regex numberOfMatchesInString:url.pathComponents[1] options:kNilOptions range:NSMakeRange(0, url.pathComponents[1].length)] == 1) {
+				if (![_preferences boolForKey:@"OvercastPodcast" default:YES]) {
+					return nil;
+				}
+
+				return [NSURL URLWithString:[NSString stringWithFormat:@"overcast://open%@", url.path]];
+			}
+		}
 	}
 
 	return nil;

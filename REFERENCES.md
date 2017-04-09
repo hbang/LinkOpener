@@ -59,3 +59,7 @@
 
 ## Filza
 * http://www.tigisoftware.com/default/?page_id=177
+
+## Overcast
+* I honestly just guessed and got lucky ¯\_(ツ)_/¯
+* https://www.macstories.net/reviews/overcast-review/#details-and-nitpicking
