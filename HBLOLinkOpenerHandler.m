@@ -19,10 +19,10 @@
 	if (self) {
 		self.name = @"LinkOpener";
 		self.identifier = @"LinkOpener";
-		self.preferencesBundle = [[NSBundle bundleWithPath:@"/Library/PreferenceBundles/LinkOpenerPrefs.bundle"] retain];
+		self.preferencesBundle = [NSBundle bundleWithPath:@"/Library/PreferenceBundles/LinkOpenerPrefs.bundle"];
 		self.preferencesClass = @"HBLOLinkOpenerListController";
 
-		_preferences = [[HBPreferences alloc] initWithIdentifier:@"org.thebigboss.linkopener"];
+		_preferences = [HBPreferences preferencesForIdentifier:@"org.thebigboss.linkopener"];
 	}
 
 	return self;
@@ -66,7 +66,7 @@
 				@"signup", @"signin", @"similar_to", @"statistics", @"terms", @"tos", @"translate", @"trends",
 				@"tweetbutton", @"twttr", @"update_discoverability", @"users", @"welcome", @"who_to_follow",
 				@"widgets", @"zendesk_auth", @"media_signup"
-			] retain];
+			];
 		});
 
 		if (url.pathComponents.count == 2 && ![NonUsernamePaths containsObject:url.pathComponents[1]]) {
@@ -250,7 +250,7 @@
 		static NSArray *SupportedPaths;
 		static dispatch_once_t onceToken;
 		dispatch_once(&onceToken, ^{
-			SupportedPaths = [@[ @"search", @"biz", @"check_in", @"check_ins" ] retain];
+			SupportedPaths = @[ @"search", @"biz", @"check_in", @"check_ins" ];
 		});
 
 		if (url.pathComponents.count > 2 && [SupportedPaths containsObject:url.pathComponents[1]]) {
@@ -281,13 +281,6 @@
 	}
 
 	return nil;
-}
-
-#pragma mark - Memory management
-
-- (void)dealloc {
-	[_preferences release];
-	[super dealloc];
 }
 
 @end

@@ -6,8 +6,16 @@
 	return @"Root";
 }
 
-+ (UIColor *)hb_tintColor {
-	return [UIColor colorWithRed:248.f / 255.f green:194.f / 255.f blue:40.f / 255.f alpha:1];
+- (instancetype)init {
+	self = [super init];
+
+	if (self) {
+		HBAppearanceSettings *appearanceSettings = [[HBAppearanceSettings alloc] init];
+		appearanceSettings.tintColor = [UIColor colorWithRed:248.f / 255.f green:194.f / 255.f blue:40.f / 255.f alpha:1];
+		self.hb_appearanceSettings = appearanceSettings;
+	}
+
+	return self;
 }
 
 @end
