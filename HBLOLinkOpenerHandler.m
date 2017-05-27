@@ -242,18 +242,28 @@
 		}
 	} else if ([url.host isEqualToString:@"instagram.com"] || [url.host isEqualToString:@"www.instagram.com"]) {
 		if (url.pathComponents.count == 2) {
+			// https://instagram.com/:username
 			if (![_preferences boolForKey:@"InstagramUser" default:YES]) {
 				return nil;
 			}
 
 			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://user?username=%@", url.pathComponents[1]]];
+		} else if (url.pathComponents.count == 3 && [url.pathComponents[1] isEqualToString:@"p"]) {
+			// https://instagram.com/p/:shortcode
+			if (![_preferences boolForKey:@"InstagramMedia" default:YES]) {
+				return nil;
+			}
+
+			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://media?shortcode=%@", url.pathComponents[1]]];
 		} else if (url.pathComponents.count == 4 && [url.pathComponents[1] isEqualToString:@"explore"] && [url.pathComponents[2] isEqualToString:@"tags"]) {
+			// https://instagram.com/explore/tags/:tag
 			if (![_preferences boolForKey:@"InstagramTag" default:YES]) {
 				return nil;
 			}
 
 			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://tag?name=%@", url.pathComponents[3]]];
 		} else if (url.pathComponents.count == 4 && [url.pathComponents[1] isEqualToString:@"explore"] && [url.pathComponents[2] isEqualToString:@"locations"]) {
+			// https://instagram.com/explore/locations/:id
 			if (![_preferences boolForKey:@"InstagramLocation" default:YES]) {
 				return nil;
 			}

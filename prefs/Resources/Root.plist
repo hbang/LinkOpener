@@ -204,6 +204,20 @@
 			<key>defaults</key>
 			<string>org.thebigboss.linkopener</string>
 			<key>key</key>
+			<string>InstagramMedia</string>
+			<key>label</key>
+			<string>instagram.com/p/C</string>
+			<key>PostNotification</key>
+			<string>org.thebigboss.linkopener/ReloadPrefs</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>defaults</key>
+			<string>org.thebigboss.linkopener</string>
+			<key>key</key>
 			<string>InstagramUser</string>
 			<key>label</key>
 			<string>instagram.com/kevin</string>
