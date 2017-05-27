@@ -1,2 +1,5 @@
 # LinkOpener
-Opens links in App Store apps. [GPL licensed.](http://www.gnu.org/copyleft/gpl.html)
+Opens links in App Store apps.
+
+## License
+Licensed under the Apache License, version 2.0. Refer to [LICENSE.md](LICENSE.md).
