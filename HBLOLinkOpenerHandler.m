@@ -121,13 +121,14 @@
 			return [NSURL URLWithString:[@"imdb:///title/" stringByAppendingString:url.pathComponents[2]]];
 		}
 	} else if ([url.host hasPrefix:@"ebay.co"] || [url.host hasPrefix:@"www.ebay.co"]) {
-		if (url.pathComponents.count == 4) {
-			// http://www.ebay.com/itm/:name/:id/
+		if (url.pathComponents.count > 2 && [url.pathComponents[1] isEqualToString:@"itm"]) {
+			// http://www.ebay.com/itm/:id/ or http://www.ebay.com/itm/:name/:id/
 			if (![_preferences boolForKey:@"EBayListing" default:YES]) {
 				return nil;
 			}
 
-			return [NSURL URLWithString:[@"ebay://launch?itm=" stringByAppendingString:url.pathComponents[3]]];
+			NSInteger index = url.pathComponents.count == 4 ? 3 : 2;
+			return [NSURL URLWithString:[@"ebay://launch?itm=" stringByAppendingString:url.pathComponents[index]]];
 		} else if (url.pathComponents.count > 3 && [url.pathComponents[1] isEqualToString:@"sch"]) {
 			// http://www.ebay.com.au/sch/i.html?_nkw=:query (ew, what decade is this?)
 			if (![_preferences boolForKey:@"EBaySearch" default:YES]) {
