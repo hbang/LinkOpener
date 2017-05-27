@@ -1,4 +1,5 @@
 #include "HBLOLinkOpenerListController.h"
+#import <CepheiPrefs/HBAppearanceSettings.h>
 
 @implementation HBLOLinkOpenerListController
 
