@@ -199,6 +199,10 @@
 			return [NSURL URLWithString:[NSString stringWithFormat:@"submarine://user/%@", url.pathComponents[2]]];
 		}
 
+		if (![_preferences boolForKey:@"RedditThread" default:YES]) {
+			return nil;
+		}
+
 		return [NSURL URLWithString:[@"alienblue://_linkopener_url?" stringByAppendingString:url.absoluteString]];
 	} else if ([url.host hasSuffix:@".tumblr.com"]) {
 		NSString *blog = [url.host componentsSeparatedByString:@"."][0];
