@@ -247,14 +247,14 @@
 				return nil;
 			}
 
-			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://user?username=%@", url.pathComponents[1]]];
+			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://user?username=%@", url.pathComponents[2]]];
 		} else if (url.pathComponents.count == 3 && [url.pathComponents[1] isEqualToString:@"p"]) {
 			// https://instagram.com/p/:shortcode
 			if (![_preferences boolForKey:@"InstagramMedia" default:YES]) {
 				return nil;
 			}
 
-			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://media?shortcode=%@", url.pathComponents[1]]];
+			return [NSURL URLWithString:[NSString stringWithFormat:@"instagram://media?shortcode=%@", url.pathComponents[2]]];
 		} else if (url.pathComponents.count == 4 && [url.pathComponents[1] isEqualToString:@"explore"] && [url.pathComponents[2] isEqualToString:@"tags"]) {
 			// https://instagram.com/explore/tags/:tag
 			if (![_preferences boolForKey:@"InstagramTag" default:YES]) {
