@@ -7,7 +7,7 @@ Description: Open web pages in their apps
 Maintainer: HASHBANG Productions <support@hbang.ws>
 Author: HASHBANG Productions <support@hbang.ws>
 Section: Addons
-Icon: file:///Library/PreferenceBundles/LinkOpener.bundle/icon@2x.png
+Icon: file:///Library/PreferenceBundles/LinkOpenerPrefs.bundle/icon@2x.png
 Depiction: https://cydia.hbang.ws/package/org.thebigboss.linkopener/
 Support: https://hbang.ws/support/
 Sponsor: thebigboss.org <http://thebigboss.org>
